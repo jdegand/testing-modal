@@ -16,7 +16,9 @@ The goal of this challenge is to test dialogs inside your application. Within th
 
 ## Thoughts
 
-- I didn't include Angular Material animations.  The mat-input apparently has an animation so I had to ignore uncaught exceptions for the Cypress tests to work.   
+- I didn't include Angular Material animations.  
+- The mat-input apparently has an animation so I had to ignore uncaught exceptions for the Cypress tests to work.
+- I updated `App.config.ts` to include provideAnimations() in the providers array, but the error still persists.  There is a misconfiguration ?     
 - My first thought on how to test a modal was to just use `document.querySelector` to grab the elements of the modal after a click on the button that brings up the modal.
 - Using `document.querySelector is kind of cheating`; you are not using testing library query selectors.  
 - The HTML doesn't provide much that is specific to each element that would make selecting each element easier.  

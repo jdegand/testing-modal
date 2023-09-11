@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 // The amount of dependencies for a little app like this is more bearable
 // if you download and use the full angular-challenges monorepo.
 
+// I don't think the angular material installation is the problem 
+// There appears to be a misconfiguration 
+
+// The Cypress.on call should probably go in a file in the cypress folder.
+
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false;
 });

@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import userEvent from '@testing-library/user-event';
 
 describe('AppComponent', () => {
-  test('error modal is displayed if you click on "Confirm" without inputing a name 1', async () => {
+  test('error modal is displayed if you click on "Confirm" without inputting a name 1', async () => {
     await render(AppComponent);
 
     const button = screen.getByRole('button');
@@ -13,14 +13,16 @@ describe('AppComponent', () => {
     expect(document.getElementsByTagName('h1')[0]).toBeInTheDocument();
   });
 
-  test('error modal is displayed if you click on "Confirm" without inputing a name 2', async () => {
+  test('error modal is displayed if you click on "Confirm" without inputting a name 2', async () => {
     await render(AppComponent);
 
     const button = screen.getByRole('button');
 
     fireEvent.click(button);
 
-    const errorHeading = document.getElementsByTagName('h1')[0] as HTMLHeadingElement;
+    const errorHeading = document.getElementsByTagName(
+      'h1'
+    )[0] as HTMLHeadingElement;
 
     expect(errorHeading).toHaveTextContent('Error');
   });
@@ -36,9 +38,15 @@ describe('AppComponent', () => {
 
     await userEvent.click(button);
 
-    const cancelButton = document.querySelectorAll('button')[1] as HTMLButtonElement;
+    /*
+    const cancelButton = document.querySelectorAll(
+      'button'
+    )[1] as HTMLButtonElement;
+    */
 
-    expect(cancelButton.textContent).toEqual('Cancel');
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
+
+    expect(cancelButton.textContent).toContain('Cancel');
 
     await userEvent.click(cancelButton);
 
@@ -58,9 +66,14 @@ describe('AppComponent', () => {
 
     await userEvent.click(button);
 
-    const confirmButton = document.querySelectorAll('button')[2] as HTMLButtonElement;
+    const confirmButton = screen.getByRole('button', { name: /confirm/i });
+    /*
+    const confirmButton = document.querySelectorAll(
+      'button'
+    )[2] as HTMLButtonElement;
+    */
 
-    expect(confirmButton.textContent).toEqual('Confirmation');
+    expect(confirmButton.textContent).toContain('Confirmation');
 
     await userEvent.click(confirmButton);
 
@@ -69,3 +82,4 @@ describe('AppComponent', () => {
     expect(message).toBeInTheDocument();
   });
 });
+
